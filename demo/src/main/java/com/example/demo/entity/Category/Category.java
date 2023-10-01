@@ -1,8 +1,5 @@
 package com.example.demo.entity.Category;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -28,8 +25,6 @@ public class Category implements Serializable {
     private Integer sort;
 
     private Long createUser;
-
-    private Long updateUser;
 
     private LocalDateTime createTime;
 

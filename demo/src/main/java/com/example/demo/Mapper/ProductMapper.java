@@ -4,4 +4,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.entity.Product.Product;
 
 public interface ProductMapper extends BaseMapper<Product> {
+
 }

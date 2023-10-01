@@ -35,11 +35,6 @@ public class Product {
     private String productionLocation;
 
     /**
-     * 生产日期
-     */
-    private LocalDateTime productionDate;
-
-    /**
      * 价格
      */
     private Double price;
@@ -48,5 +43,9 @@ public class Product {
      * 创建者
      */
     private Long createUser;
+
+    private LocalDateTime createTime;
+
+    private Double number;
 
 }

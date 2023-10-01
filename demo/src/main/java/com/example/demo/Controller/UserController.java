@@ -53,7 +53,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/register")
-    public Result<Void> register(@RequestBody UserRegisterVo userRegisterVo, HttpServletRequest request){
+    public Result<String> register(@RequestBody UserRegisterVo userRegisterVo, HttpServletRequest request){
 
         String password = userRegisterVo.getPassword();
         String checkPassword = userRegisterVo.getCheckPassword();
@@ -72,7 +72,7 @@ public class UserController {
 
         userService.Register(userRegisterVo);
 
-        return Result.success();
+        return Result.success("登陆成功");
     }
 
 
@@ -82,9 +82,9 @@ public class UserController {
      * @return
      */
     @PostMapping("/update")
-    public Result update(@RequestBody User user){
+    public Result<String> update(@RequestBody User user){
         return userService.updateById(user)
-                ?Result.success()
+                ?Result.success("更新成功")
                 :Result.error("更新失败");
     }
 

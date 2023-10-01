@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.common.Result;
 import com.example.demo.entity.Category.Category;
+import com.example.demo.entity.User.User;
 import com.example.demo.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +48,6 @@ public class CategoryController {
 
         Long userId = (Long) request.getSession().getAttribute("userId");
         category.setCreateUser(userId);
-        category.setUpdateUser(userId);
 
         categoryService.save(category);
         return Result.success("新增分类成功");
