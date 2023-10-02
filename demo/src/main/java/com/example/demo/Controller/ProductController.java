@@ -21,6 +21,7 @@ import java.util.List;
 public class ProductController {
     @Resource
     private ProductService productService;
+
     @PostMapping
     public Result<String> save(@RequestBody ProductSaveVo productSaveVo,
                                HttpServletRequest request) {
@@ -74,14 +75,27 @@ public class ProductController {
      * @param ids
      * @return
      */
-//    @GetMapping("{id}")
-//    public void example(@PathVariable Long id)
     @DeleteMapping
     public Result<String> delete(Long ids) {
 
         productService.removeById(ids);
 
         return Result.success("分类信息删除成功");
+    }
+
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<Product> get(@PathVariable Long id){
+
+        LambdaQueryWrapper<Product> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Product::getId,id);
+
+        return Result.success(productService.getOne(queryWrapper));
     }
 
 }

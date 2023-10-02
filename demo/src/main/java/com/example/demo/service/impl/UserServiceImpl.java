@@ -32,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         user.setUpdateTime(LocalDateTime.now());
         user.setUserType(userRegisterVo.getUserType());
         user.setAccount(userRegisterVo.getAccount());
-
+        user.setPassword(userRegisterVo.getPassword());
 
         this.save(user);
     }

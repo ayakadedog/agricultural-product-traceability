@@ -34,8 +34,13 @@ public class UserController {
         queryWrapper.eq(User::getAccount,userLoginVo.getAccount());
 
         User user = userService.getOne(queryWrapper);
+
         if(user == null){
             return Result.error("用户不存在，请先注册");
+        }
+
+        if (!user.getPassword().equals(userLoginVo.getPassword())) {
+            return Result.error("密码错误");
         }
 
         set(request,"userId",user.getId());
@@ -72,7 +77,7 @@ public class UserController {
 
         userService.Register(userRegisterVo);
 
-        return Result.success("登陆成功");
+        return Result.success("注册成功");
     }
 
 
