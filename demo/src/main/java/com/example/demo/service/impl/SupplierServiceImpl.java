@@ -23,10 +23,13 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierMapper, Supplier> i
 
         Supplier supplier = new Supplier();
         BeanUtils.copyProperties(product,supplier);
+
         supplier.setId(null);
-        supplier.setCreateTime(LocalDateTime.now());
         supplier.setCreateUser(id);
         supplier.setNumber(number);
+        supplier.setProductId(product.getId());
+        supplier.setCreateTime(LocalDateTime.now());
+
 
         this.save(supplier);
     }

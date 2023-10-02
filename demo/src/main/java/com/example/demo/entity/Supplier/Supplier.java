@@ -48,4 +48,6 @@ public class Supplier {
     private LocalDateTime createTime;
 
     private Double number;
+
+    private Long productId;
 }

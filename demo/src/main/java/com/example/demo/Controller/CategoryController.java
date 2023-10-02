@@ -59,32 +59,25 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/page")
-    public Result<Page> page (@RequestParam(required = false) Integer page,
-                              @RequestParam(required = false) Integer pageSize,
-                              HttpServletRequest request) {
-        if (page == null) {
-            page = 1;
-        }
-
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-
+    public Result<Page<Category>> page(@RequestParam(defaultValue = "1") Integer page,
+                                       @RequestParam(defaultValue = "10") Integer pageSize,
+                                       HttpServletRequest request) {
         Long userId = (Long) request.getSession().getAttribute("userId");
 
-
-        //分页构造器
+        // 分页构造器
         Page<Category> pageInfo = new Page<>(page, pageSize);
-        //条件构造器
-        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Category::getCreateUser,userId);
-        //添加排序条件，根据sort进行排序
-        queryWrapper.orderByAsc(Category::getSort);
 
-        //分页查询
+        // 条件构造器
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Category::getCreateUser, userId)
+                .orderByAsc(Category::getSort);
+
+        // 分页查询
         categoryService.page(pageInfo, queryWrapper);
+
         return Result.success(pageInfo);
     }
+
 
     /**
      * 根据id删除分类
@@ -129,17 +122,17 @@ public class CategoryController {
      */
     @GetMapping("/list")
     public Result<List<Category>> list(Category category) {
-        //条件构造器
+        // 条件构造器
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
-        //添加条件
-        queryWrapper.eq(category.getType() != null, Category::getType, category.getType());
-        queryWrapper.eq(Category::getCreateUser,category.getCreateUser());
-        //添加排序条件
-        queryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
+        queryWrapper.eq(category.getType() != null, Category::getType, category.getType())
+                .eq(Category::getCreateUser, category.getCreateUser())
+                .orderByAsc(Category::getSort)
+                .orderByDesc(Category::getUpdateTime);
 
         List<Category> list = categoryService.list(queryWrapper);
 
         return Result.success(list);
     }
+
 
 }
